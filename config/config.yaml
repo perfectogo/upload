@@ -1,0 +1,9 @@
+port: ":8080"
+
+db:
+    username: "jasurbek"
+    password: "1001"
+    host: "localhost"
+    port: "5432"
+    dbname: "images"
+    sslmode: "disable"
