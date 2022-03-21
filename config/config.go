@@ -16,6 +16,7 @@ type Config struct {
 	PostgresDatabase string
 	PostgresUser     string
 	PostgresPassword string
+	LogLevel         string
 }
 
 // Load loads environment vars and inflates Config
@@ -35,6 +36,7 @@ func Load() (Config, error) {
 	cfg.PostgresDatabase = viper.GetString("db.dbname")
 	cfg.PostgresUser = viper.GetString("db.username")
 	cfg.PostgresPassword = os.Getenv("DB_PASSWORD")
+	cfg.LogLevel = viper.GetString("db.logLevel")
 	return cfg, nil
 }
 

@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"path/filepath"
 
+	l "github.com/perfectogo/upload/pkg/logger"
+
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
@@ -32,12 +34,14 @@ func (h *OutHandler) UploadImg(ctx *gin.Context) {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"message": "Unable to save the file",
 		})
+		h.Log.Error("failed to upload image", l.Error(err))
 		return
 	}
 	if err = h.Service.Upload().UploadImg(filePath); err != nil {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"message": "Unable to save the file in Database",
 		})
+		h.Log.Error("failed to upload image path in databse", l.Error(err))
 		return
 	}
 
@@ -53,6 +57,7 @@ func (h *OutHandler) GetImages(ctx *gin.Context) {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"message": "not found images",
 		})
+		h.Log.Error("failed to get image from databse", l.Error(err))
 		return
 	}
 	ctx.JSON(200, imgURLs)

@@ -6,3 +6,5 @@ db:
     port: "5432"
     dbname: "images"
     sslmode: "disable"
+log:
+    logLevel: "debug"
